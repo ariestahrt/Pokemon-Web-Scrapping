@@ -1,0 +1,95 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root{
+	--ff-subtitle: 'Source Sans Pro', sans-serif;
+	--ff-title: 'JetBrains Mono', monospace;;
+
+	--fw-bold: 900;
+	--fw-reg: 1000;
+
+	--fs-small: 0.75rem;
+	--fs-reg: 1.75rem;
+	--fs-big: 2.25rem;
+
+	--bg: #111;
+	--bg2: #171717;
+	--bg3: #212121;
+	--fg: #EEE;
+	--purple: #b48ead;
+	--blue: #7dbeff;
+	--green: #a3be8c;
+	--orange: #ebcb8b;
+	--red: #bf616a;
+}
+
+html {
+	background-color: var(--bg);
+}
+
+body {
+	margin-top: 2rem;
+	background-color: inherit;
+}
+
+.container {
+	font-family: var(--ff-title);
+}
+
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: var(--bg3);
+}
+
+.thead-darks {
+    color: #fff;
+    background-color: var(--bg3) !important;
+}
+
+td:nth-child(1) {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.table-dark {
+    color: #fff;
+    background-color: var(--bg2) !important;
+}
+
+.smaller-text {
+	font-size: 0.8em;
+	opacity: 0.5;
+}
+
+a {
+	position: relative;
+	transition: text-decoration 250ms ease-in-out;
+}
+
+a:link, a:visited {
+	color: white;
+	text-decoration: none;
+	transition: text-decoration 250ms ease-in-out;
+}
+
+a:after {    
+	background: none repeat scroll 0 0 transparent;
+	bottom: -2px;
+	content: "";
+	display: block;
+	height: 2px;
+	left: 50%;
+	position: absolute;
+	background: #fff;
+	transition: width 0.3s ease-out 0s, left 0.3s ease-out 0s;
+	width: 0%;
+}
+
+a:hover:after { 
+	width: 100%; 
+	left: 0; 
+}
