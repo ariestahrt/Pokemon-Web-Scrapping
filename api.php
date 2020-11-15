@@ -10,7 +10,13 @@ function getInnerText($element){
     return getStr($element, '>', '<');
 }
 
-$html = file_get_html('https://pokemondb.net/pokedex/all');
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://pokemondb.net/pokedex/all');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$result = curl_exec($ch);
+
+$html = new simple_html_dom();
+$html->load($result);
 
 $tableContent = $html->find("tbody");
 $tableContent = $tableContent[0];
@@ -41,6 +47,6 @@ foreach($tableContent->find('tr') as $element){
 }
 
 $json = json_encode($Pokemon_List);
-die($json);
+echo $json;
 
 ?>
