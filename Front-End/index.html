@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Table</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">            
+            <div class="table">
+                <div class="table-header">
+                    <div class="header__item"><a id="id" class="filter__link filter__link--number" href="#">ID</a></div>
+                    <div class="header__item"><a id="name" class="filter__link" href="#">Name</a></div>
+                    <div class="header__item"><a id="type" class="filter__link" href="#">Type</a></div>
+                    <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Total</a></div>
+                    <div class="header__item"><a id="hp" class="filter__link filter__link--number" href="#">HP</a></div>
+                    <div class="header__item"><a id="attack" class="filter__link filter__link--number" href="#">Attack</a></div>
+                    <div class="header__item"><a id="defense" class="filter__link filter__link--number" href="#">Defense</a></div>
+                    <div class="header__item"><a id="sp_attack" class="filter__link filter__link--number" href="#">Sp. Attack</a></div>
+                    <div class="header__item"><a id="sp_defense" class="filter__link filter__link--number" href="#">Sp. Defense</a></div>
+                    <div class="header__item"><a id="speed" class="filter__link filter__link--number" href="#">Speed</a></div>
+                </div>
+                <div class="table-content" id="table-pokemon">	
+                </div>	
+            </div>
+        </div>
+    </body>
+    <script src="script.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                method: 'POST',
+                url: 'http://163.172.153.50/api_return_html.php',
+                contentType: 'application/json',
+                data: "",
+            }).done(function(msg) {
+                document.getElementById("table-pokemon").innerHTML = msg;
+                // console.log(msg);
+            });
+        });
+    </script>
+</html>

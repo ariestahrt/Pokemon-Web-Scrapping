@@ -1,4 +1,8 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+
 include_once('simple_html_dom.php');
 function getStr($string, $start, $end) {
     $str = explode($start, $string);
@@ -25,8 +29,10 @@ $Pokemon_List = array();
 
 foreach($tableContent->find('tr') as $element){
     $Pokemon_Type = [];
+    $Pokemon_Type_Str = "";
     foreach($element->find('td[class=cell-icon]')[0]->find('a') as $type){
         $type = getStr($type, '>', '<');
+        $Pokemon_Type_Str .= $type.", ";
         array_push($Pokemon_Type, $type);
     }
 
@@ -44,11 +50,24 @@ foreach($tableContent->find('tr') as $element){
         "SPEED" => getInnerText($element->find('td[class=cell-num]')[5]),
     );
 
-    array_push($Pokemon_List, $Pokemon);
+    echo '<div class="table-row">
+    <div class="table-data">'.$Pokemon["ID"].'</div>
+    <div class="table-data">'.$Pokemon["NAME"].'</div>
+    <div class="table-data">'.$Pokemon_Type_Str.'</div>
+    <div class="table-data">'.$Pokemon["TOTAL"].'</div>
+    <div class="table-data">'.$Pokemon["HP"].'</div>
+    <div class="table-data">'.$Pokemon["ATTACK"].'</div>
+    <div class="table-data">'.$Pokemon["DEFENSE"].'</div>
+    <div class="table-data">'.$Pokemon["SP_ATTACK"].'</div>
+    <div class="table-data">'.$Pokemon["SP_DEFENSE"].'</div>
+    <div class="table-data">'.$Pokemon["SPEED"].'</div>
+    </div>';
+
+    // array_push($Pokemon_List, $Pokemon);
     // break;
 }
 
-$json = json_encode($Pokemon_List);
-echo $json;
+// $json = json_encode($Pokemon_List);
+// echo $json;
 
 ?>
