@@ -37,7 +37,7 @@
 		<table class='table table-dark '>
 			<thead class='thead-darks'>
 				<tr>
-					<th style="width:25%">National No</th>
+					<th style="width:25%">National Num</th>
 					<th style="width:25%">Image</th>
 					<th style="width:50%">Name</th>
 				</tr>
