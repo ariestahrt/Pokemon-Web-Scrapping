@@ -59,11 +59,11 @@
         // $evoChart = $html->find('.infocard-list-evo', 0);
         
         
+        echo "<div class='poke-detail-section'>";
         echo "<div class'spacer-2rem'><h4 class='text-center'>".$name." Data</h4></div>";
         echo "<div class='text-center poke-img-container'>";
             echo "<img class='poke-img' src='".$image."'>";
         echo "</div>";
-        echo "<div class=''>";
             echo "<div class='row'>";
                 echo "<div class='col-6 text-right'>National No:</div><div class='col-6'> #".$natNo."</div>";
                 echo "<div class='col-6 text-right'>Type:</div><div class='col-6'> ".$type."</div>";
@@ -76,8 +76,8 @@
             echo "</div>";
         echo "</div>";
 
-        echo "<div class'spacer-2rem'><h4 class='text-center'>".$name." Base Stats</h4></div>";
-        echo "<div class=''>";
+        echo "<div class='poke-detail-section'>";
+            echo "<div class'spacer-2rem'><h4 class='text-center'>".$name." Base Stats</h4></div>";
             echo "<div class='row'>";
                 echo "<table class='table table-dark table-noborder'>";
                     echo "<thead>";

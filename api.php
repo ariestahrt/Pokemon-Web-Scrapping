@@ -29,6 +29,13 @@ $tableContent = $tableContent[0];
 $Pokemon_List = array();
 
 foreach($tableContent->find('tr') as $element){
+
+    if($element->find('td[class=cell-name]',0)->find('small')){
+        $alt_name = getInnerText($element->find('td[class=cell-name]',0)->find('small', 0));
+    }else{
+        $alt_name = null;
+    }
+
     $Pokemon_Type = [];
     foreach($element->find('td[class=cell-icon]')[0]->find('a') as $type){
         $type = getStr($type, '>', '<');
@@ -39,6 +46,7 @@ foreach($tableContent->find('tr') as $element){
         "IMG" => getStr($element, 'data-src="', '"'),
         "ID" => getInnerText($element->find('span[class=infocard-cell-data]')[0]),
         "NAME" => getInnerText($element->find('a[class=ent-name]')[0]),
+        "ALT_NAME" => $alt_name,
         "TYPE" => $Pokemon_Type,
         "TOTAL" => getInnerText($element->find('td[class=cell-total]')[0]),
         "HP" => getInnerText($element->find('td[class=cell-num]')[0]),
@@ -50,7 +58,8 @@ foreach($tableContent->find('tr') as $element){
     );
 
     array_push($Pokemon_List, $Pokemon);
-    // break;
+
+    // print_r($Pokemon_List);
 }
 
 $json = json_encode($Pokemon_List);

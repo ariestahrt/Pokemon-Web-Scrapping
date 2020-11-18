@@ -15,15 +15,15 @@
 	--fs-reg: 1.75rem;
 	--fs-big: 2.25rem;
 
-	/* --bg: #111;
+	--bg: #111;
 	--bg2: #171717;
 	--bg3: #212121;
-	--fg: #EEE; */
+	--fg: #EEE;
 
-	--bg: #EEE;
+	/* --bg: #EEE;
 	--bg2: #EEE;
 	--bg3: #DDD;
-	--fg: #333;
+	--fg: #333; */
 
 	--purple: #b48ead;
 	--blue: #7dbeff;
@@ -152,8 +152,8 @@ a:hover:after {
 
 a.type-icon {
     display: inline-block;
-    width: 66px;
-    margin-bottom: 4px;
+	width: 66px;
+	margin: 0 2px 4px;
     background: #dbdbdb;
     border: 1px solid #a3a3a3;
     border-radius: 4px;
