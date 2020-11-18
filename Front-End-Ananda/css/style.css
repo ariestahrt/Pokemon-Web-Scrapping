@@ -1,8 +1,6 @@
 *,
 *::before,
 *::after {
-	margin: 0;
-	padding: 0;
 	box-sizing: border-box;
 }
 
@@ -17,10 +15,16 @@
 	--fs-reg: 1.75rem;
 	--fs-big: 2.25rem;
 
-	--bg: #111;
+	/* --bg: #111;
 	--bg2: #171717;
 	--bg3: #212121;
-	--fg: #EEE;
+	--fg: #EEE; */
+
+	--bg: #EEE;
+	--bg2: #EEE;
+	--bg3: #DDD;
+	--fg: #333;
+
 	--purple: #b48ead;
 	--blue: #7dbeff;
 	--green: #a3be8c;
@@ -35,10 +39,28 @@ html {
 body {
 	margin-top: 2rem;
 	background-color: inherit;
+	color: var(--fg) !important;
 }
 
 .container {
-	font-family: var(--ff-title);
+	font-family: var(--ff-subtitle);
+	border-radius: 10px;
+	background-color: var(--bg2);
+	padding: 0;
+}
+
+.container-padding {
+	padding: 1rem;
+}
+
+/**** Tables Overriding ****/
+table {
+	border-collapse: collapse;
+	border-radius: 20px;
+}
+
+.round {
+	border-radius: 15px;
 }
 
 .table-dark td, .table-dark th, .table-dark thead th {
@@ -46,23 +68,53 @@ body {
 }
 
 .thead-darks {
-    color: #fff;
+    color: var(--fg);
     background-color: var(--bg3) !important;
+}
+
+.table-dark {
+	color: var(--fg);
+    background-color: var(--bg2) !important;
+}
+
+.table-dark.table-noborder td, .table-dark.table-noborder th, .table-dark.table-noborder thead th {
+	border: none;
+}
+
+th {
+	border-top: none !important;
+	vertical-align: middle !important;
+}
+
+td{
+	vertical-align: middle !important;
 }
 
 td:nth-child(1) {
 	text-align: center;
-	vertical-align: middle !important;
 }
 
-.table-dark {
-    color: #fff;
-    background-color: var(--bg2) !important;
+th:first-of-type {
+	text-align: center;
+	border-top-left-radius: 15px;
+}
+th:last-of-type {
+	border-top-right-radius: 15px;
+}
+tr:last-of-type td:first-of-type {
+	border-bottom-left-radius: 15px;
+}
+tr:last-of-type td:last-of-type {
+	border-bottom-right-radius: 15px;
 }
 
 .smaller-text {
 	font-size: 0.8em;
 	opacity: 0.5;
+}
+
+.text-muted {
+    color: #80878f!important;
 }
 
 a {
@@ -71,7 +123,7 @@ a {
 }
 
 a:link, a:visited {
-	color: white;
+	color: var(--fg);
 	text-decoration: none;
 	transition: text-decoration 250ms ease-in-out;
 }
@@ -84,7 +136,7 @@ a:after {
 	height: 2px;
 	left: 50%;
 	position: absolute;
-	background: #fff;
+	background: var(--fg);
 	transition: width 0.3s ease-out 0s, left 0.3s ease-out 0s;
 	width: 0%;
 }
@@ -92,4 +144,104 @@ a:after {
 a:hover:after { 
 	width: 100%; 
 	left: 0; 
+}
+
+.icon-arrow-e::before {
+    content: "\2192\FE0E";
+}
+
+a.type-icon {
+    display: inline-block;
+    width: 66px;
+    margin-bottom: 4px;
+    background: #dbdbdb;
+    border: 1px solid #a3a3a3;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.2);
+    color: #fff;
+    font-size: .95rem;
+    font-weight: normal;
+    line-height: 1.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    text-transform: uppercase;
+    transition: opacity .4s;
+}
+
+.spacer-2rem {
+	height: 2rem;
+	margin: 1rem;
+}
+
+.poke-img-container {
+	display: flex;
+	margin: 1rem auto;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
+	background-color: white;
+	border-radius: 15px;
+	height: 250px;
+	width: 250px;
+}
+
+.poke-img {
+	max-width: 225px;
+	max-height: 225px;
+}
+
+a.type-normal {
+	background-color: #aa9;
+	color: var(--bg3) !important;
+}
+a.type-fire {
+	background-color: #f42;
+}
+a.type-water {
+	background-color: #39f;
+}
+a.type-electric {
+	background-color: #fc3;
+}
+a.type-grass {
+	background-color: #7c5;
+}
+a.type-ice {
+	background-color: #6cf;
+}
+a.type-fighting {
+	background-color: #b54;
+}
+a.type-poison {
+	background-color: #a59;
+}
+a.type-ground {
+	background-color: #db5;
+}
+a.type-flying {
+	background-color: #89f;
+}
+a.type-psychic {
+	background-color: #f59;
+}
+a.type-bug {
+	background-color: rgb(138, 153, 26);
+}
+a.type-rock {
+	background-color: rgb(153, 138, 78);
+}
+a.type-ghost {
+	background-color: rgb(83, 83, 161);
+}
+a.type-dragon {
+	background-color: rgb(77, 53, 230);
+}
+a.type-dark {
+	background-color: #754;
+}
+a.type-steel {
+	background-color: rgb(80, 80, 87);
+}
+a.type-fairy {
+	background-color: rgb(248, 139, 248);
 }
