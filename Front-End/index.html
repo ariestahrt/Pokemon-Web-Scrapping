@@ -28,13 +28,40 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $.ajax({
-                method: 'POST',
-                url: 'https://ariesta.club/pokemon-api/helper.php',
-                contentType: 'application/json',
-                data: "",
-            }).done(function(msg) {
-                document.getElementById("table-pokemon").innerHTML = msg;
-                // console.log(msg);
+                method: 'PUT',
+                url: 'https://163.172.153.50/api.php',
+                dataType : 'json',
+                success: function(data){
+                    var AllRow = '';
+                    data.forEach(element => {
+                        // console.log(element);
+                        var PokemonType = '';
+
+                        for(var i=0; i<element["TYPE"].length; i++){
+                            PokemonType += element["TYPE"][i];
+                            if(i!=element["TYPE"].length-1) PokemonType += ', ';
+                        }
+
+                        var Row = `<div class="table-row">
+                                <div class="table-data">`+element["ID"]+`</div>
+                                <div class="table-data">`+element["NAME"]+`</div>
+                                <div class="table-data">`+PokemonType+`</div>
+                                <div class="table-data">`+element["TOTAL"]+`</div>
+                                <div class="table-data">`+element["HP"]+`</div>
+                                <div class="table-data">`+element["ATTACK"]+`</div>
+                                <div class="table-data">`+element["DEFENSE"]+`</div>
+                                <div class="table-data">`+element["SP_ATTACK"]+`</div>
+                                <div class="table-data">`+element["SP_DEFENSE"]+`</div>
+                                <div class="table-data">`+element["SPEED"]+`</div>
+                                </div>`;
+                        // console.log(Row);
+                        AllRow += Row;
+                    });
+                    document.getElementById("table-pokemon").innerHTML = AllRow;
+                },
+                error: function(xhr) {
+                    console.log("Error: " + xhr.statusText);
+                }
             });
         });
     </script>
