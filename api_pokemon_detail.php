@@ -196,7 +196,7 @@ $Pokemon["Evolution"] = strval(str_replace('<span class="img-fixed img-sprite " 
 //     $Pokemon["HasEvolution"] = false;
 // }
 
-// print_r($Pokemon);
+// print_r($Pokemon['Evolution']);
 
 $json = json_encode($Pokemon);
 echo $json;
