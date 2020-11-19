@@ -7,6 +7,9 @@ header("Access-Control-Allow-Methods: *");
 include_once('simple_html_dom.php');
 
 $pokemon_name = isset($_GET['name']) ? $_GET['name'] : "bulbasaur";
+$is_alt_name = isset($_GET['alt_name']) ? true : false;
+
+if($is_alt_name) $alt_name = $_GET['alt_name'];
 
 function getStr($string, $start, $end) {
     $str = explode($start, $string);
@@ -90,39 +93,40 @@ $Pokemon["speed"] = array(
 
 $Pokemon["Stats_Total"] = getStr($vitalstable, '<td class="cell-total"><b>', '<');
 
+// Get Evolution data of pokemon
 if($html->find('.infocard-list-evo', 0)) {
     $Pokemon["HasEvolution"] = true;
-    $Pokemon["Evolution"] = [];
+    $Pokemon["Evolution"] = strval(str_replace("<span class=\"img-fixed img-sprite\" data-","<img ", $html->find('div[class=infocard-list-evo]', 0)));
+    
+    // $counter = 0;
+    // foreach($html->find('div[class=infocard]') as $evolution){
+    //     $Pokemon_Type = [];
+    //     foreach($evolution->find('small', 1)->find('a') as $type){
+    //         array_push($Pokemon_Type, getInnerText($type));
+    //     }
 
-    $counter = 0;
-    foreach($html->find('div[class=infocard]') as $evolution){
-        $Pokemon_Type = [];
-        foreach($evolution->find('small', 1)->find('a') as $type){
-            array_push($Pokemon_Type, getInnerText($type));
-        }
+    //     if($html->find('span[class=infocard infocard-arrow]', $counter)){
+    //         $next_lvl_evo = $html->find('span[class=infocard infocard-arrow]', $counter);
+    //         $next_lvl_evo = getStr($next_lvl_evo, '<small>', '<');    
+    //     }else{
+    //         $next_lvl_evo = "Maks Evolution";
+    //     }
 
-        if($html->find('span[class=infocard infocard-arrow]', $counter)){
-            $next_lvl_evo = $html->find('span[class=infocard infocard-arrow]', $counter);
-            $next_lvl_evo = getStr($next_lvl_evo, '<small>', '<');    
-        }else{
-            $next_lvl_evo = "Maks Evolution";
-        }
+    //     array_push($Pokemon["Evolution"], array(
+    //         "Name" => getStr(explode('<a class="ent-name"', $evolution)[1], '>', '<'),
+    //         "Image_Url" => getStr($evolution, 'data-src="', '"'),
+    //         "National_Number" => getStr($evolution, '<span class="infocard-lg-data text-muted"><small>', '<'),
+    //         "Type" => $Pokemon_Type,
+    //         "next_lvl_evo" => $next_lvl_evo
+    //     ));
 
-        array_push($Pokemon["Evolution"], array(
-            "Name" => getStr(explode('<a class="ent-name"', $evolution)[1], '>', '<'),
-            "Image_Url" => getStr($evolution, 'data-src="', '"'),
-            "National_Number" => getStr($evolution, '<span class="infocard-lg-data text-muted"><small>', '<'),
-            "Type" => $Pokemon_Type,
-            "next_lvl_evo" => $next_lvl_evo
-        ));
-
-        $counter++;
-    }
+    //     $counter++;
+    // }
 } else {
     $Pokemon["HasEvolution"] = false;
 }
 
-// print_r($Pokemon);
+// print_r($Pokemon['Evolution']);
 
 $json = json_encode($Pokemon);
 echo $json;
