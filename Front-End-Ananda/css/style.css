@@ -141,7 +141,7 @@ a:after {
 	width: 0%;
 }
 
-a:hover:after { 
+a:not(.no-anim):hover:after { 
 	width: 100%; 
 	left: 0; 
 }
