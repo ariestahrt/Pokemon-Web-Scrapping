@@ -18,7 +18,7 @@
 		<div class="container mx-auto section round container-padding">
 			<div id="pokemon-detail">
 				<div class="">
-				   <h4 class="text-center">Pokemon Data</h4>
+				   <h4 class="text-center" id="pokemon-detail-name" style="text-transform: capitalize;">Pokemon Data : </h4>
 				</div>
 				<div class="text-center poke-img-container" id="pokemon-detail-img"></div>
 				<div class="pokemon-detail-section">
@@ -34,8 +34,7 @@
 					  <div class="col-6 text-right">Weight:</div>
 					  <div class="col-6" id="pokemon-detail-weight"></div>
 					  <div class="col-6 text-right">Abilities:</div>
-					  <div class="col-6">
-						  <span class="text-muted">1. <a target="_blank" href="https://pokemondb.net/ability/oblivious" title="Prevents it from becoming infatuated.">Oblivious</a></span><br><span class="text-muted"> 2. <a target="_blank" href="https://pokemondb.net/ability/own-tempo" title="Prevents the Pokémon from becoming confused.">Own Tempo</a></span><br><small class="text-muted"><a target="_blank" href="https://pokemondb.net/ability/regenerator" title="Restores a little HP when withdrawn from battle.">Regenerator</a> (hidden ability)</small><br></div>
+					  <div class="col-6" id="pokemon-detail-abilities"></div>
 					  <div class="col-6 text-right">Catch Rate:</div>
 					  <div class="col-6" id="pokemon-detail-catch-rate"> </div>
 					  <div class="col-6 text-right">Growth Rate:</div>
@@ -179,6 +178,13 @@
 
 		function displayDetail(pokeName, altName, type){
 			showLoader();
+
+			if(altName != 'no_alt_name'){
+				$('#pokemon-detail-name').html("Pokemon Data : " + altName);
+			}else{
+				$('#pokemon-detail-name').html("Pokemon Data : " + pokeName);
+			}
+
 			$.ajax({
 				method: 'PUT',
 				url: 'https://163.172.153.50/api_pokemon_detail.php?name=' + pokeName + '&alt_name=' + altName,
@@ -195,6 +201,8 @@
 				$('#pokemon-detail-species').html(data.species);
 				$('#pokemon-detail-height').html(data.height);
 				$('#pokemon-detail-weight').html(data.weight);
+
+				$('#pokemon-detail-abilities').html(data.abilities_html);
 
 				// var catch_rate = JSON.parse(data.catch_rate);
 				$('#pokemon-detail-catch-rate').html(data.catch_rate.Percentage +'% <small class="text-muted">'+data.catch_rate.Detail+'</small>');
@@ -238,7 +246,6 @@
 			getRandomPokemonByType(type);
 		}
 
-		var chosenPokemon = [];
 		function getRandomPokemonByType(type){
 			let counter = 0;
 			let allRecPoke = '<div class="row">';
@@ -248,7 +255,6 @@
 			}).done(function(data) {
 				datajson = JSON.parse(data);
 
-				chosenPokemon.splice(0, chosenPokemon.length);
 				const random1 = Math.floor(Math.random() * datajson.length);
 				var random2 = Math.floor(Math.random() * datajson.length);
 				var random3 = Math.floor(Math.random() * datajson.length);
@@ -260,9 +266,9 @@
 					random3 = Math.floor(Math.random() * datajson.length);
 				}
 
-				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random1]['IMG']+'"><br><small>#'+datajson[random1]['ID']+'</small><br><a href="#pokemon-detail">'+datajson[random1]['NAME']+'</a></div>';
-				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random2]['IMG']+'"><br><small>#'+datajson[random2]['ID']+'</small><br><a href="#pokemon-detail">'+datajson[random2]['NAME']+'</a></div>';
-				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random3]['IMG']+'"><br><small>#'+datajson[random3]['ID']+'</small><br><a href="#pokemon-detail">'+datajson[random3]['NAME']+'</a></div>';
+				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random1]['IMG']+'"><br><small>#'+datajson[random1]['ID']+'</small><br><a href="#pokemon-detail" onclick="displayDetail(\''+datajson[random1]["LINK_NAME"]+'\',\''+datajson[random1]["ALT_NAME"]+'\',\''+datajson[random1]["TYPE"][0]+'\')" >'+datajson[random1]['NAME']+'</a></div>';
+				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random2]['IMG']+'"><br><small>#'+datajson[random2]['ID']+'</small><br><a href="#pokemon-detail" onclick="displayDetail(\''+datajson[random2]["LINK_NAME"]+'\',\''+datajson[random2]["ALT_NAME"]+'\',\''+datajson[random2]["TYPE"][0]+'\')" >'+datajson[random2]['NAME']+'</a></div>';
+				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random3]['IMG']+'"><br><small>#'+datajson[random3]['ID']+'</small><br><a href="#pokemon-detail" onclick="displayDetail(\''+datajson[random1]["LINK_NAME"]+'\',\''+datajson[random1]["ALT_NAME"]+'\',\''+datajson[random1]["TYPE"][0]+'\')" >'+datajson[random3]['NAME']+'</a></div>';
 
 				console.log(type);
 				$('#pokemon-detail-rec-title').html('Recommended '+'<a class="type-icon type-'+type.toLowerCase()+'" target="_blank" href="https://pokemondb.net/type/'+type+'">'+type+'</a>'+' Type');
@@ -291,7 +297,7 @@
                         var row = `<tr>
 							<td>`+element["ID"]+`</td>
 							<td><img src="`+element["IMG"]+`"></td>`;
-							if(element["ALT_NAME"]) {
+							if(element["ALT_NAME"] != 'no_alt_name') {
 								row += `<td><a href="#pokemon-detail" onclick="displayDetail('`+element["LINK_NAME"]+`','`+element["ALT_NAME"]+`','`+element["TYPE"][0]+`' )">`+element["NAME"]+`</a><br><div class='smaller-text'>`+element["ALT_NAME"]+`</div></td></tr>`;
 							} else {
 								row += `<td><a href="#pokemon-detail" onclick="displayDetail('`+element["LINK_NAME"]+`', 'no_alt_name','`+element["TYPE"][0]+`')">`+element["NAME"]+`</a></td></tr>`;

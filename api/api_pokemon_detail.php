@@ -95,6 +95,8 @@ $Pokemon["weight"] = getStr($vitalstabletr->children(4), '<td>', "<");
 $Pokemon["abilities"] = [];
 foreach($vitalstabletr->children(5)->find('a') as $ability) array_push($Pokemon["abilities"], getInnerText($ability));
 
+$Pokemon["abilities_html"] = getStr($result, '<th>Abilities</th>', '</td>');
+$Pokemon["abilities_html"] = str_replace('<td>','', $Pokemon["abilities_html"]);
 
 // Get Training data of pokemon
 
@@ -179,8 +181,8 @@ $evolution_html->load($evolution_element);
 foreach($evolution_html->find('a') as $aelement){
     if(inStr($aelement->href, 'pokedex')){
         $thisPokemon_name = explode("pokedex/", $aelement->href)[1];
-        $evolution_element = str_replace('<a href="'.strval($aelement->href).'"', '<div href="#pokemon-detail"', $evolution_element);
-        $evolution_element = str_replace('<a class="ent-name" href="'.strval($aelement->href).'"', '<a class="ent-name" href="#pokemon-detail"', $evolution_element);
+        $evolution_element = str_replace('<a href="'.strval($aelement->href).'"', '<div href="#pokemon-detail" onclick="displayDetail(\''.$thisPokemon_name.'\', \'no_alt_name\', \''.$Pokemon["type"][0].'\')"', $evolution_element);
+        $evolution_element = str_replace('<a class="ent-name" href="'.trim(strval($aelement->href)).'"', '<a class="ent-name" href="#pokemon-detail" onclick="displayDetail(\''.$thisPokemon_name.'\', \'no_alt_name\', \''.$Pokemon["type"][0].'\')"', $evolution_element);
         $evolution_element = str_replace('sprite"></span></a>', 'sprite"></img></div>', $evolution_element);
     }
 }

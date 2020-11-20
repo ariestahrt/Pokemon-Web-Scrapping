@@ -37,7 +37,7 @@ foreach($tableContent->find('tr') as $element){
     if($element->find('td[class=cell-name]',0)->find('small')){
         $alt_name = getInnerText($element->find('td[class=cell-name]',0)->find('small', 0));
     }else{
-        $alt_name = null;
+        $alt_name = "no_alt_name";
     }
 
     $Pokemon_Type = [];
