@@ -179,7 +179,8 @@ $evolution_html->load($evolution_element);
 foreach($evolution_html->find('a') as $aelement){
     if(inStr($aelement->href, 'pokedex')){
         $thisPokemon_name = explode("pokedex/", $aelement->href)[1];
-        $evolution_element = str_replace('<'.trim(strval($aelement->tag)).' href="'.strval($aelement->href).'"', '<div href="#pokemon-detail" onclick="displayDetail(\''.$thisPokemon_name.'\', \'no_alt_name\')"', $evolution_element);
+        $evolution_element = str_replace('<a href="'.strval($aelement->href).'"', '<div href="#pokemon-detail"', $evolution_element);
+        $evolution_element = str_replace('<a class="ent-name" href="'.strval($aelement->href).'"', '<a class="ent-name" href="#pokemon-detail"', $evolution_element);
         $evolution_element = str_replace('sprite"></span></a>', 'sprite"></img></div>', $evolution_element);
     }
 }
@@ -190,6 +191,7 @@ if(inStr($evolution_element, 'does not evolve')){
     $Pokemon["HasEvolution"] = true;
 }
 $Pokemon["Evolution"] = strval(str_replace('<span class="img-fixed img-sprite " data-',"<img ", $evolution_element));
+// echo "\n".$Pokemon["Evolution"]."\n";
 
 // // Get Evolution data of pokemon
 // if($html->find('.infocard-list-evo', 0)) {
@@ -212,7 +214,7 @@ $Pokemon["Evolution"] = strval(str_replace('<span class="img-fixed img-sprite " 
 //     $Pokemon["HasEvolution"] = false;
 // }
 
-// print_r($Pokemon['Evolution']);
+// print_r($Pokemon);
 
 $json = json_encode($Pokemon);
 echo $json;

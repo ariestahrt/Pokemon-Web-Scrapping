@@ -195,7 +195,12 @@
 }
 
 .infocard-list-evo>.infocard-arrow {
-    width: 165px
+    width: 165px;
+    text-align: center;
+}
+
+.infocard {
+    text-align: center;
 }
 
 .infocard-evo-split {
