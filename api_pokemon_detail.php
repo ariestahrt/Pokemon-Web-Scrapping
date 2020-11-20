@@ -160,11 +160,27 @@ $Pokemon["Stats_Total"] = getStr($vitalstable, '<td class="cell-total"><b>', '<'
 $evolution_element = getStr($result, '<h2>Evolution chart</h2>', '<h2>');
 $evolution_html = new simple_html_dom();
 $evolution_html->load($evolution_element);
+
+// echo $evolution_element."\n=======";
+// foreach($evolution_html->find('a') as $aelement){
+//     // echo $aelement->href."\n";
+
+//     if(inStr($aelement, 'class="ent-name')){
+//         $old = $aelement;
+//         $new = str_replace('<a', '<div', $aelement);
+//         $new = str_replace('</a', '</div', $new);
+//         // echo $new."\n";
+//         $evolution_element = str_replace($old, $new, $evolution_element);
+//         // echo $evolution_element."\n";
+//     }
+
+// }
+
 foreach($evolution_html->find('a') as $aelement){
-    // echo $aelement->href."\n";
     if(inStr($aelement->href, 'pokedex')){
         $thisPokemon_name = explode("pokedex/", $aelement->href)[1];
-        $evolution_element = str_replace(strval($aelement->href).'"', '#pokemon-detail" onclick="displayDetail(\''.$thisPokemon_name.'\', \'no_alt_name\')"', $evolution_element);
+        $evolution_element = str_replace('<'.trim(strval($aelement->tag)).' href="'.strval($aelement->href).'"', '<div href="#pokemon-detail" onclick="displayDetail(\''.$thisPokemon_name.'\', \'no_alt_name\')"', $evolution_element);
+        $evolution_element = str_replace('sprite"></span></a>', 'sprite"></img></div>', $evolution_element);
     }
 }
 
