@@ -181,7 +181,7 @@
 			showLoader();
 			$.ajax({
 				method: 'PUT',
-				url: '../api_pokemon_detail.php?name=' + pokeName + '&alt_name=' + altName,
+				url: 'https://163.172.153.50/api_pokemon_detail.php?name=' + pokeName + '&alt_name=' + altName,
 			}).done(function(msg) {
 				// console.log(msg);
                 var data = JSON.parse(msg);
@@ -244,7 +244,7 @@
 			let allRecPoke = '<div class="row">';
 			$.ajax({
 				method: 'PUT',
-				url: '../api.php?type=' + type,
+				url: 'https://163.172.153.50/api.php?type=' + type,
 			}).done(function(data) {
 				datajson = JSON.parse(data);
 
@@ -274,7 +274,7 @@
         $(document).ready(function(){
 			$.ajax({
 				method: 'PUT',
-                url: '../api.php',
+                url: 'https://163.172.153.50/api.php',
 				dataType : 'json',
 				// https://163.172.153.50
                 success: function(data){
@@ -309,6 +309,9 @@
 					},
                 error: function(xhr) {
                     console.log("Error: " + xhr.statusText);
+					$('#content').html("<h4>Error while loading the page please open this link.</h4><a href='https://163.172.153.50/api.php'><a>")
+					showPage();
+
                 }
             });
         });
