@@ -15,6 +15,10 @@ function getInnerText($element){
     return getStr($element, '>', '<');
 }
 
+$selected_type = isset($_GET['type']) ? $_GET['type'] : "NO_TYPE";
+
+// $selected_type = "Rock";
+
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'https://pokemondb.net/pokedex/all');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -42,10 +46,15 @@ foreach($tableContent->find('tr') as $element){
         array_push($Pokemon_Type, $type);
     }
 
+    if($selected_type != "NO_TYPE"){
+        if(!in_array($selected_type, $Pokemon_Type)) continue;
+    }
+
     $Pokemon = array(
         "IMG" => getStr($element, 'data-src="', '"'),
         "ID" => getInnerText($element->find('span[class=infocard-cell-data]')[0]),
         "NAME" => getInnerText($element->find('a[class=ent-name]')[0]),
+        "LINK_NAME" => getStr($element, '<a class="ent-name" href="/pokedex/', '"'),
         "ALT_NAME" => $alt_name,
         "TYPE" => $Pokemon_Type,
         "TOTAL" => getInnerText($element->find('td[class=cell-total]')[0]),
@@ -60,6 +69,7 @@ foreach($tableContent->find('tr') as $element){
     array_push($Pokemon_List, $Pokemon);
 
     // print_r($Pokemon_List);
+    // break;
 }
 
 $json = json_encode($Pokemon_List);

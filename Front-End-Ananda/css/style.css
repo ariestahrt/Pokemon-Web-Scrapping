@@ -53,10 +53,18 @@ body {
 	padding: 1rem;
 }
 
+.container.section {
+	margin-top: 2rem !important;
+}
+
 /**** Tables Overriding ****/
 table {
 	border-collapse: collapse;
 	border-radius: 20px;
+}
+
+.table {
+	margin-bottom: 0;
 }
 
 .round {
@@ -153,7 +161,7 @@ a:not(.no-anim):hover:after {
 a.type-icon {
     display: inline-block;
 	width: 66px;
-	margin: 0 2px 4px;
+	margin: 0 2px 4px 0;
     background: #dbdbdb;
     border: 1px solid #a3a3a3;
     border-radius: 4px;
@@ -168,11 +176,9 @@ a.type-icon {
     transition: opacity .4s;
 }
 
-.spacer-2rem {
-	height: 2rem;
-	margin: 1rem;
+.pokemon-detail-section {
+	margin-bottom: 3rem;
 }
-
 .poke-img-container {
 	display: flex;
 	margin: 1rem auto;

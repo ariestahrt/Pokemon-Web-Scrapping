@@ -9,195 +9,183 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./css/style.css">
 	<link rel="stylesheet" href="./css/pokemon-evo.css">
+	<link rel="stylesheet" href="./css/loader.css">
 </head>
 
 <body>
-	<div class="container mx-auto round container-padding">
-		<div id="pokemon-detail">
-			<div class="spacer-2rem">
-			   <h4 class="text-center">Pokemon Data</h4>
-			</div>
-			<div class="text-center poke-img-container" id="pokemon-detail-img"></div>
-			<div class="">
-			   <div class="row">
-				  <div class="col-6 text-right">National No:</div>
-				  <div class="col-6" id="pokemon-detail-natno"></div>
-				  <div class="col-6 text-right">Type:</div>
-				  <div class="col-6" id="pokemon-detail-type"></div>
-				  <div class="col-6 text-right">Species:</div>
-				  <div class="col-6" id="pokemon-detail-species"></div>
-				  <div class="col-6 text-right">Height:</div>
-				  <div class="col-6" id="pokemon-detail-height"></div>
-				  <div class="col-6 text-right">Weight:</div>
-				  <div class="col-6" id="pokemon-detail-weight"></div>
-				  <div class="col-6 text-right">Abilities:</div>
-				  <div class="col-6">
-					  <span class="text-muted">1. <a target="_blank" href="https://pokemondb.net/ability/oblivious" title="Prevents it from becoming infatuated.">Oblivious</a></span><br><span class="text-muted"> 2. <a target="_blank" href="https://pokemondb.net/ability/own-tempo" title="Prevents the Pokémon from becoming confused.">Own Tempo</a></span><br><small class="text-muted"><a target="_blank" href="https://pokemondb.net/ability/regenerator" title="Restores a little HP when withdrawn from battle.">Regenerator</a> (hidden ability)</small><br></div>
-				  <div class="col-6 text-right">Catch Rate:</div>
-				  <div class="col-6" id="pokemon-detail-catch-rate"> </div>
-				  <div class="col-6 text-right">Growth Rate:</div>
-				  <div class="col-6" id="pokemon-detail-growth-rate"> Medium Fast</div>
-			   </div>
-			</div>
-			<div class="spacer-2rem">
-			   <h4 class="text-center">Base Stats</h4>
-			</div>
-			<div class="">
-			   <div class="row">
-				  <table class="table table-dark table-noborder">
-					 <thead></thead>
-					 <tbody>
-						<tr>
-						   <th>HP</th>
-						   <td class="cell-num" id="pokemon-detail-current-hp"></td>
-						   <td class="cell-num" id="pokemon-detail-min-hp"></td>
-						   <td class="cell-num" id="pokemon-detail-max-hp"></td>
-						</tr>
-						<tr>
-						   <th>Attack</th>
-						   <td class="cell-num" id="pokemon-detail-current-attack"></td>
-						   <td class="cell-num" id="pokemon-detail-min-attack"></td>
-						   <td class="cell-num" id="pokemon-detail-max-attack"></td>
-						</tr>
-						<tr>
-						   <th>Defense</th>
-						   <td class="cell-num" id="pokemon-detail-current-defense"></td>
-						   <td class="cell-num" id="pokemon-detail-min-defense"></td>
-						   <td class="cell-num" id="pokemon-detail-max-defense"></td>
-						</tr>
-						<tr>
-						   <th>Sp. Atk</th>
-						   <td class="cell-num" id="pokemon-detail-current-spattack"></td>
-						   <td class="cell-num" id="pokemon-detail-min-spattack"></td>
-						   <td class="cell-num" id="pokemon-detail-max-spattack"></td>
-						</tr>
-						<tr>
-						   <th>Sp. Def</th>
-						   <td class="cell-num" id="pokemon-detail-current-spdefense"></td>
-						   <td class="cell-num" id="pokemon-detail-min-spdefense"></td>
-						   <td class="cell-num" id="pokemon-detail-max-spdefense"></td>
-						</tr>
-						<tr>
-						   <th>Speed</th>
-						   <td class="cell-num" id="pokemon-detail-current-speed"></td>
-						   <td class="cell-num" id="pokemon-detail-min-speed"></td>
-						   <td class="cell-num" id="pokemon-detail-max-speed"></td>
-						</tr>
-					 </tbody>
-				  </table>
-			   </div>
-			</div>
-			<h4 id="pokemon-detail-evolution-title" class="text-center">Evolution Chart</h4>
-			<div id="pokemon-detail-evolution">
-				<div class="infocard-list-evo">
-					<div class="infocard ">
-						<span class="infocard-lg-img">
-							<a href="/pokedex/bulbasaur" class="no-anim">
-								<img class="img-fixed img-sprite " src="https://img.pokemondb.net/sprites/bank/normal/bulbasaur.png" alt="Bulbasaur sprite">
-							</a>
-						</span>
-						<span class="infocard-lg-data text-muted">
-							<small>#001</small><br>
-							<a class="ent-name" href="/pokedex/bulbasaur">Bulbasaur</a><br>
-							<small>
-								<a href="/type/grass" class="itype grass">Grass</a> · <a href="/type/poison" class="itype poison">Poison</a>
-							</small>
-						</span>
-					</div>
 
-					<span class="infocard infocard-arrow">
-						<i class="icon-arrow icon-arrow-e"></i>
-						<small>(Level 16)</small>
-					</span>
-
-					<div class="infocard ">
-						<span class="infocard-lg-img">
-							<a href="/pokedex/ivysaur" class="no-anim">
-								<img class="img-fixed img-sprite " src="https://img.pokemondb.net/sprites/bank/normal/ivysaur.png" alt="Ivysaur sprite">
-							</a>
-						</span>
-						<span class="infocard-lg-data text-muted">
-							<small>#002</small><br>
-							<a class="ent-name" href="/pokedex/ivysaur">Ivysaur</a><br>
-							<small>
-								<a href="/type/grass" class="itype grass">Grass</a> · <a href="/type/poison" class="itype poison">Poison</a>
-							</small>
-						</span>
-					</div>
-					<span class="infocard infocard-arrow">
-						<i class="icon-arrow icon-arrow-e"></i>
-						<small>(Level 32)</small>
-					</span>
-					<div class="infocard ">
-						<span class="infocard-lg-img">
-							<a href="/pokedex/venusaur" class="no-anim">
-								<img class="img-fixed img-sprite " src="https://img.pokemondb.net/sprites/bank/normal/venusaur.png" alt="Venusaur sprite">
-							</a>
-						</span>
-						<span class="infocard-lg-data text-muted">
-							<small>#003</small><br>
-							<a class="ent-name" href="/pokedex/venusaur">Venusaur</a><br>
-							<small>
-								<a href="/type/grass" class="itype grass">Grass</a> · <a href="/type/poison" class="itype poison">Poison</a>
-							</small>
-						</span>
-					</div>
+	<div id="content" class="animate-bottomin">
+		<div class="container mx-auto section round container-padding">
+			<div id="pokemon-detail">
+				<div class="">
+				   <h4 class="text-center">Pokemon Data</h4>
 				</div>
-			</div>
-		 </div>
+				<div class="text-center poke-img-container" id="pokemon-detail-img"></div>
+				<div class="pokemon-detail-section">
+				   <div class="row">
+					  <div class="col-6 text-right">National No:</div>
+					  <div class="col-6" id="pokemon-detail-natno"></div>
+					  <div class="col-6 text-right">Type:</div>
+					  <div class="col-6" id="pokemon-detail-type"></div>
+					  <div class="col-6 text-right">Species:</div>
+					  <div class="col-6" id="pokemon-detail-species"></div>
+					  <div class="col-6 text-right">Height:</div>
+					  <div class="col-6" id="pokemon-detail-height"></div>
+					  <div class="col-6 text-right">Weight:</div>
+					  <div class="col-6" id="pokemon-detail-weight"></div>
+					  <div class="col-6 text-right">Abilities:</div>
+					  <div class="col-6">
+						  <span class="text-muted">1. <a target="_blank" href="https://pokemondb.net/ability/oblivious" title="Prevents it from becoming infatuated.">Oblivious</a></span><br><span class="text-muted"> 2. <a target="_blank" href="https://pokemondb.net/ability/own-tempo" title="Prevents the Pokémon from becoming confused.">Own Tempo</a></span><br><small class="text-muted"><a target="_blank" href="https://pokemondb.net/ability/regenerator" title="Restores a little HP when withdrawn from battle.">Regenerator</a> (hidden ability)</small><br></div>
+					  <div class="col-6 text-right">Catch Rate:</div>
+					  <div class="col-6" id="pokemon-detail-catch-rate"> </div>
+					  <div class="col-6 text-right">Growth Rate:</div>
+					  <div class="col-6" id="pokemon-detail-growth-rate"> Medium Fast</div>
+				   </div>
+				</div>
+	
+				<div class="">
+				   <h4 class="text-center">Base Stats</h4>
+				</div>
+				<div class="pokemon-detail-section">
+				   <div class="row">
+					  <table class="table table-dark table-noborder">
+						 <thead></thead>
+						 <tbody>
+							<tr>
+							   <th class="text-right">HP</th>
+							   <td class="cell-num" id="pokemon-detail-current-hp"></td>
+							   <td class="cell-num" id="pokemon-detail-min-hp"></td>
+							   <td class="cell-num" id="pokemon-detail-max-hp"></td>
+							   <td class="cell-num"></td>
+							</tr>
+							<tr>
+							   <th class="text-right">Attack</th>
+							   <td class="cell-num" id="pokemon-detail-current-attack"></td>
+							   <td class="cell-num" id="pokemon-detail-min-attack"></td>
+							   <td class="cell-num" id="pokemon-detail-max-attack"></td>
+							</tr>
+							<tr>
+							   <th class="text-right">Defense</th>
+							   <td class="cell-num" id="pokemon-detail-current-defense"></td>
+							   <td class="cell-num" id="pokemon-detail-min-defense"></td>
+							   <td class="cell-num" id="pokemon-detail-max-defense"></td>
+							</tr>
+							<tr>
+							   <th class="text-right">Sp. Atk</th>
+							   <td class="cell-num" id="pokemon-detail-current-spattack"></td>
+							   <td class="cell-num" id="pokemon-detail-min-spattack"></td>
+							   <td class="cell-num" id="pokemon-detail-max-spattack"></td>
+							</tr>
+							<tr>
+							   <th class="text-right">Sp. Def</th>
+							   <td class="cell-num" id="pokemon-detail-current-spdefense"></td>
+							   <td class="cell-num" id="pokemon-detail-min-spdefense"></td>
+							   <td class="cell-num" id="pokemon-detail-max-spdefense"></td>
+							</tr>
+							<tr>
+							   <th class="text-right">Speed</th>
+							   <td class="cell-num" id="pokemon-detail-current-speed"></td>
+							   <td class="cell-num" id="pokemon-detail-min-speed"></td>
+							   <td class="cell-num" id="pokemon-detail-max-speed"></td>
+							</tr>
+							<tr>
+								<th class="text-right">Total</th>
+								<td class="cell-num" id="pokemon-detail-stats-total"></td>
+								<td class="cell-num text-muted">Min</td>
+								<td class="cell-num text-muted">Max</td>
+							 </tr>
+						 </tbody> 
+					  </table>
+				   </div>
+				</div>
+	
+				<div class="">
+					<h4 id="pokemon-detail-evolution-title" class="text-center">Evolution Chart</h4>
+				</div>
+				<div class="pokemon-detail-section" id="pokemon-detail-evolution">
+					
+				</div>
+	
+				<div class="">
+					<h4 id="pokemon-detail-rec-title" class="text-center">Recommended Type</h4>
+				</div>
+				<div class="pokemon-detail-section" id="pokemon-detail-rec">
+					
+				</div>
+	
+			 </div>
+		</div>
+	
+		<div class="container mx-auto round section">
+			<table class='table table-dark '>
+				<thead class='thead-darks'>
+					<tr>
+						<th style="width:25%">National No</th>
+						<th style="width:25%">Image</th>
+						<th style="width:50%">Name</th>
+					</tr>
+				</thead>
+				
+				<!-- <tbody> -->
+				<tbody id="table-pokemon">
+					
+				</tbody>
+			</table>
+		</div>
+		
 	</div>
 
-	<div class="container mx-auto round">
-		<table class='table table-dark '>
-			<thead class='thead-darks'>
-				<tr>
-					<th style="width:25%">National No</th>
-					<th style="width:25%">Image</th>
-					<th style="width:50%">Name</th>
-				</tr>
-            </thead>
-            
-			<!-- <tbody> -->
-            <tbody id="table-pokemon">
-                
-            </tbody>
-		</table>
-	</div>
+	<div id="loader"></div>
 
 	<script type="text/javascript">
-		$('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function(event) {
-			if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+		var myVar;
+
+		function myFunction() {
+			myVar = setTimeout(showPage, 3000);
+		}
+
+		function showPage() {
+			document.getElementById("loader").style.display = "none";
+			document.getElementById("content").style.display = "block";
+		}
+
+		function showLoader() {
+			document.getElementById("loader").style.display = "block";
+			document.getElementById("content").style.display = "none";
+		}
+		// $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function(event) {
+		// 	if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
 				
-				var target = $(this.hash);
-				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+		// 		var target = $(this.hash);
+		// 		target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
 
-				if (target.length) {
-					event.preventDefault();
-					$('html, body').animate({
-						scrollTop: target.offset().top
-					}, 1500, function() {
-						var $target = $(target);
-						$target.focus();
-						if ($target.is(":focus")) {
-							return false;
-						} else {
-							$target.attr('tabindex','-1');
-							$target.focus();
-						};
-					});
-				}
-			}
-		});
+		// 		if (target.length) {
+		// 			event.preventDefault();
+		// 			$('html, body').animate({
+		// 				scrollTop: target.offset().top
+		// 			}, 1500, function() {
+		// 				var $target = $(target);
+		// 				$target.focus();
+		// 				if ($target.is(":focus")) {
+		// 					return false;
+		// 				} else {
+		// 					$target.attr('tabindex','-1');
+		// 					$target.focus();
+		// 				};
+		// 			});
+		// 		}
+		// 	}
+		// });
 
-		function displayDetail(pokeName, AltName, type){
-			// console.log(pokeUrl);
+		function displayDetail(pokeName, altName, type){
+			showLoader();
 			$.ajax({
 				method: 'PUT',
-				url: 'https://163.172.153.50/api_pokemon_detail.php?name=' + pokeName + '&alt_name=' + AltName,
+				url: '../api_pokemon_detail.php?name=' + pokeName + '&alt_name=' + altName,
 			}).done(function(msg) {
 				// console.log(msg);
                 var data = JSON.parse(msg);
-                console.log(data.national_number);
+                // console.log(data.national_number);
 				$('#pokemon-detail-img').html('<img class="poke-img" src="'+data.image+'">');
 				$('#pokemon-detail-natno').html(' #<strong>'+data.national_number+'</strong>');
 				$('#pokemon-detail-type').html('');
@@ -236,29 +224,34 @@
 				$('#pokemon-detail-min-speed').html(data.speed.min);
 				$('#pokemon-detail-max-speed').html(data.speed.max);
 
-				$('#pokemon-detail-evolution').html(data.Evolution);
-				// if(data.HasEvolution){
-				// 	$('#pokemon-detail-evolution-title').html(pokeName + "'s Evolution");
-				// 	$('#pokemon-detail-evolution').html(data.Evolution);
-				// } else {
-				// 	$('#pokemon-detail-evolution.title').html("This Pokemon has no evolution.");
-				// }
+				$('#pokemon-detail-stats-total').html('<strong>'+data.Stats_Total+'</strong>');
+
+				pokeName = String(pokeName);
+				if(data.HasEvolution){
+					$('#pokemon-detail-evolution-title').html(pokeName.charAt(0).toUpperCase() + pokeName.slice(1) +"'s Evolution");
+					$('#pokemon-detail-evolution').html(data.Evolution);
+				} else {
+					$('#pokemon-detail-evolution-title').html(pokeName.charAt(0).toUpperCase() + pokeName.slice(1) +" does not evolve.");
+					$('#pokemon-detail-evolution').html("");
+				}
 			});
 			getRandomPokemonByType(type);
 		}
 
+		var chosenPokemon = [];
 		function getRandomPokemonByType(type){
+			let counter = 0;
+			let allRecPoke = '<div class="row">';
 			$.ajax({
 				method: 'PUT',
-				url: 'https://163.172.153.50/api.php?type=' + type,
+				url: '../api.php?type=' + type,
 			}).done(function(data) {
 				datajson = JSON.parse(data);
 
-				var Pokemon = [];
-
+				chosenPokemon.splice(0, chosenPokemon.length);
 				const random1 = Math.floor(Math.random() * datajson.length);
-				const random2 = Math.floor(Math.random() * datajson.length);
-				const random3 = Math.floor(Math.random() * datajson.length);
+				var random2 = Math.floor(Math.random() * datajson.length);
+				var random3 = Math.floor(Math.random() * datajson.length);
 				while(random2 == random1){
 					random2 = Math.floor(Math.random() * datajson.length);
 				}
@@ -267,48 +260,53 @@
 					random3 = Math.floor(Math.random() * datajson.length);
 				}
 
-				console.log(random1);
-				console.log(random2);
-				console.log(random3);
+				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random1]['IMG']+'"><br><small>#'+datajson[random1]['ID']+'</small><br><a href="#pokemon-detail">'+datajson[random1]['NAME']+'</a></div>';
+				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random2]['IMG']+'"><br><small>#'+datajson[random2]['ID']+'</small><br><a href="#pokemon-detail">'+datajson[random2]['NAME']+'</a></div>';
+				allRecPoke += '<div class="col-4 text-center"><img src="'+datajson[random3]['IMG']+'"><br><small>#'+datajson[random3]['ID']+'</small><br><a href="#pokemon-detail">'+datajson[random3]['NAME']+'</a></div>';
 
-				Pokemon.push(datajson[random1]);
-				Pokemon.push(datajson[random2]);
-				Pokemon.push(datajson[random3]);
-
-				console.table(Pokemon);
+				console.log(type);
+				$('#pokemon-detail-rec-title').html('Recommended '+'<a class="type-icon type-'+type.toLowerCase()+'" target="_blank" href="https://pokemondb.net/type/'+type+'">'+type+'</a>'+' Type');
+				$('#pokemon-detail-rec').html(allRecPoke);
+				showPage();
 			});
 		}
         
         $(document).ready(function(){
-            $.ajax({
-                method: 'PUT',
-                url: 'https://163.172.153.50/api.php',
+			$.ajax({
+				method: 'PUT',
+                url: '../api.php',
 				dataType : 'json',
-				
+				// https://163.172.153.50
                 success: function(data){
-					var AllRow = '';
+					var allRow = '';
 					
                     data.forEach(element => {
-                        // console.log(element);
-                        var pokemonype = '';
-
+						// console.log(element);
+                        var pokemonType = '';
                         for(var i=0; i<element["TYPE"].length; i++){
-                            pokemonype += element["TYPE"][i];
-                            if(i!=element["TYPE"].length-1) pokemonype += ', ';
+							pokemonType += element["TYPE"][i];
+                            if(i!=element["TYPE"].length-1) pokemonType += ', ';
                         }
-
-                        var Row = `<tr>
-                                <td>`+element["ID"]+`</td>
-                                <td><img src="`+element["IMG"]+`"></td>`;
-                        if(element["ALT_NAME"]) {
-                            Row += `<td><a href="#pokemon-detail" onclick="displayDetail('`+element["LINK_NAME"]+`','`+element["ALT_NAME"]+`','`+element["TYPE"][0]+`' )">`+element["NAME"]+`</a><br><div class='smaller-text'>`+element["ALT_NAME"]+`</div></td></tr>`;
-                        } else {
-                            Row += `<td><a href="#pokemon-detail" onclick="displayDetail('`+element["LINK_NAME"]+`', 'no_alt_name','`+element["TYPE"][0]+`')">`+element["NAME"]+`</a></td></tr>`;
-                        }
-                        AllRow += Row;
-                    });
-                    $("#table-pokemon").html(AllRow);
-                },
+						
+                        var row = `<tr>
+							<td>`+element["ID"]+`</td>
+							<td><img src="`+element["IMG"]+`"></td>`;
+							if(element["ALT_NAME"]) {
+								row += `<td><a href="#pokemon-detail" onclick="displayDetail('`+element["LINK_NAME"]+`','`+element["ALT_NAME"]+`','`+element["TYPE"][0]+`' )">`+element["NAME"]+`</a><br><div class='smaller-text'>`+element["ALT_NAME"]+`</div></td></tr>`;
+							} else {
+								row += `<td><a href="#pokemon-detail" onclick="displayDetail('`+element["LINK_NAME"]+`', 'no_alt_name','`+element["TYPE"][0]+`')">`+element["NAME"]+`</a></td></tr>`;
+							}
+							allRow += row;
+						});
+						$("#table-pokemon").html(allRow);
+						const rand = Math.floor(Math.random() * data.length);
+						if(data[rand]['ALT_NAME']){
+							displayDetail(data[rand]['LINK_NAME'], data[rand]['ALT_NAME'], data[rand]['TYPE'][0]);
+						} else {
+							displayDetail(data[rand]['LINK_NAME'], 'no_alt_name', data[rand]['TYPE'][0]);
+						}
+						showPage();
+					},
                 error: function(xhr) {
                     console.log("Error: " + xhr.statusText);
                 }

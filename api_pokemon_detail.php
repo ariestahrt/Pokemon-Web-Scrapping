@@ -154,28 +154,53 @@ $Pokemon["speed"] = array(
 
 $Pokemon["Stats_Total"] = getStr($vitalstable, '<td class="cell-total"><b>', '<');
 
-// Get Evolution data of pokemon
-if($html->find('.infocard-list-evo', 0)) {
-    // $selected_evo_element=$html->find('div[class=infocard-list-evo]', 0); // default
-    $evo_element = "";
-    foreach($html->find('div[class=infocard-list-evo]') as $evo){
-        $evo_element .= strval($evo);
-        $evo_html = new simple_html_dom();
-        $evo_html->load($evo);
-        $evo = $evo_html->find('a')->href;
-        // $evo = $evo->find('a')->href;
-        // print_r(gettype($evo));
-        echo strval($evo);
+
+// Get Evolution data new method
+
+$evolution_element = getStr($result, '<h2>Evolution chart</h2>', '<h2>');
+$evolution_html = new simple_html_dom();
+$evolution_html->load($evolution_element);
+foreach($evolution_html->find('a') as $aelement){
+    if(inStr($aelement->href, 'pokedex')){
+        $thisPokemon_name = explode("pokedex/", $aelement->href)[1];
+        $evolution_element = str_replace('<a href="'.strval($aelement->href).'"', '<div href="#pokemon-detail"', $evolution_element);
+        $evolution_element = str_replace('<a class="ent-name" href="'.strval($aelement->href).'"', '<a class="ent-name" href="#pokemon-detail"', $evolution_element);
+        $evolution_element = str_replace('sprite"></span></a>', 'sprite"></img></div>', $evolution_element);
     }
-    $Pokemon["HasEvolution"] = true;
-    $Pokemon["Evolution"] = strval(str_replace("<span class=\"img-fixed img-sprite\" data-","<img ", $evo_element));
-} else {
-    $Pokemon["HasEvolution"] = false;
 }
+
+if(inStr($evolution_element, 'does not evolve')){
+    $Pokemon["HasEvolution"] = false;
+}else{
+    $Pokemon["HasEvolution"] = true;
+}
+$Pokemon["Evolution"] = strval(str_replace('<span class="img-fixed img-sprite " data-',"<img ", $evolution_element));
+// echo "\n".$Pokemon["Evolution"]."\n";
+
+// // Get Evolution data of pokemon
+// if($html->find('.infocard-list-evo', 0)) {
+//     // $selected_evo_element=$html->find('div[class=infocard-list-evo]', 0); // default
+//     $evo_element = "";
+//     foreach($html->find('div[class=infocard-list-evo]') as $evo){
+//         $evo_element .= strval($evo);
+        
+//         foreach($evo->find('a') as $aelement){
+//             // echo $aelement->href."\n";
+//             if(inStr($aelement->href, 'pokedex')){
+//                 $thisPokemon_name = explode("pokedex/", $aelement->href)[1];
+//                 $evo_element = str_replace(strval($aelement->href).'"', '#pokemon-detail" onclick="displayDetail(\''.$thisPokemon_name.'\', \'no_alt_name\')"', $evo_element);
+//             }
+//         }
+//     }
+//     $Pokemon["HasEvolution"] = true;
+//     $Pokemon["Evolution"] = strval(str_replace("<span class=\"img-fixed img-sprite\" data-","<img ", $evo_element));
+// } else {
+//     $Pokemon["HasEvolution"] = false;
+// }
 
 // print_r($Pokemon);
 
 $json = json_encode($Pokemon);
-// echo $json;
+echo $json;
 
 ?>
